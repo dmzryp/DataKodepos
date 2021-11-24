@@ -1,0 +1,77 @@
+﻿@model DataKodepos.Models.Kodepos
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden />
+    <div class="border p-3">
+        
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Delete Kode Pos</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="NoKodepos"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Kelurahan"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Kecamatan"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input asp-for="NoKodepos" disabled class="form-control" />
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Kelurahan" disabled class="form-control" />
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Kecamatan" disabled class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Jenis"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Kabupaten"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Propinsi"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input asp-for="Jenis" disabled class="form-control" />
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" disabled asp-for="Kabupaten" />                       
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" asp-for="Propinsi" disabled />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-10 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-danger w-75" value="Delete" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

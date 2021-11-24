@@ -1,0 +1,85 @@
+﻿@model DataKodepos.Models.Kodepos
+
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Tambah Kodepos</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="NoKodepos"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Kelurahan"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Kecamatan"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input asp-for="NoKodepos" class="form-control" />
+                        <span asp-validation-for="NoKodepos" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Kelurahan" class="form-control" />
+                        <span asp-validation-for="Kelurahan" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Kecamatan" class="form-control" />
+                        <span asp-validation-for="Kecamatan" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Jenis"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Kabupaten"></label>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="Propinsi"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input asp-for="Jenis" class="form-control" />
+                        <span asp-validation-for="Jenis" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        
+                        <select class="form-control" asp-for="Kabupaten" 
+                                asp-items="@(new SelectList(ViewBag.ListofKabupaten, "Value", "Text"))">
+                        </select>
+                        <span asp-validation-for="Kabupaten" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                       
+                        <select class="form-control" name="Propinsi"
+                                asp-items="@(new SelectList(ViewBag.ListofPropinsi, "Value", "Text"))">
+                        </select>
+
+                        <span asp-validation-for="Propinsi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-75" value="Simpan" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-danger w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

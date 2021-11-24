@@ -1,0 +1,146 @@
+﻿@model IEnumerable<DataKodepos.Models.Kodepos>
+
+@{ 
+    ViewData["Title"] = "index";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Data Kodepos</h2>
+        </div>
+        <div class="col-6 text-right">
+
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="input-group">
+            <div class="col-4 text-left">
+                <a class="control-label">Propinsi </a>
+                @Html.DropDownList("ListofPropinsi", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-4 text-left">
+                <a class="control-label">Kabupaten </a>
+                @Html.DropDownList("ListofKabupaten", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-1 text-right">
+                <a class="control-label">&nbsp;</a>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary" asp-route-pg="1">Search</button>
+                </div>
+            </div>
+            <div class="col-1 text-right">
+                <a class="control-label">&nbsp;</a>
+                <div class="input-group-append">
+                    <a asp-controller="DataKodePos" asp-action="Index">All Data</a>
+                </div>
+            </div>
+            <div class="col-2 text-right">
+                <a class="control-label">&nbsp;</a>
+                <div class="input-group-append">
+                    <a asp-controller="DataKodePos" asp-action="Create" class="btn btn-primary">Tambah Kodepos</a>
+                </div>
+            </div>
+
+        </div>
+    
+
+
+    @if (Model.Count() > 0)
+    {
+
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>
+                        No Kode Pos
+                    </th>
+                    <th>
+                        Kelurahan
+                    </th>
+                    <th>
+                        Kecamatan
+                    </th>
+                    <th>
+                        Jenis
+                    </th>
+                    <th>
+                        Kabupaten
+                    </th>
+                    <th>
+                        Propinsi
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ var i = 1; }
+                @foreach (var item in Model)
+                {
+                    var rowNo = (pager.CurrentPage - 1) * pager.PageSize + i;
+                    i++;
+                <tr>
+                    <td>@rowNo</td>
+                    <td>@item.NoKodepos</td>
+                    <td>@item.Kelurahan</td>
+                    <td>@item.Kecamatan</td>
+                    <td>@item.Jenis</td>
+                    <td>@item.Kabupaten</td>
+                    <td>@item.Propinsi</td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@item.Id">Edit</a>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+        <div>
+            @if (pager.TotalPages > 0)
+            {
+                <ul class="pagination justify-content-end">
+                    @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                    {
+                    <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                        @if (ViewData["cek"] == "post")
+                            {
+                                <button type="submit" class="page-link" asp-route-pg="@pge">@pge </button>
+                            }
+                            else
+                            {
+                                <a class="page-link" asp-controller="DataKodepos" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                            }
+                        
+                        
+                    </li>
+                    }
+                </ul>
+            }
+        </div>
+
+    }
+    else
+    {
+        <p>No data</p>
+    }
+                    }
+   
+
+</div>         
